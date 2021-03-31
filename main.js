@@ -2,7 +2,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 $(document).ready(function() {
     window.ethereum.enable().then(async function(accounts){
-        ulycon = await new web3.eth.Contract(window.abi, "0xd2D19f51E12ab8aEC9D22530Bf4644Bc5C9Da8Af", {from: accounts[0]});
+        ulycon = await new web3.eth.Contract(window.abi, "0xA6422b7866376852b1d53e0F5860102b637717ce", {from: accounts[0]});
 
         showCurrentTimestamp();
         showBalance();

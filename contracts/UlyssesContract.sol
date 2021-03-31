@@ -62,6 +62,10 @@ contract UlyssesContract{
     }
     
     function withdraw() public payable {
+        if(block.timestamp > Vaults[msg.sender].timeLockedAt + Vaults[msg.sender].time){
+            Vaults[msg.sender].isLocked = false;
+        }
+        
         require(Vaults[msg.sender].isLocked == false, "Your vault is still locked!");
         require(balances[msg.sender] != 0, "You do not have any funds in this contract!");
         
