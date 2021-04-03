@@ -10,54 +10,129 @@
     <script type="text/javascript" src="./web3.min.js"></script>
     <script type="text/javascript" src="./abi.js"></script>
     <script type="text/javascript" src="./main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Ulysses Contract</title>
+    <title>Ulysses' Contract</title>
 </head>
-<body>
+<body class="bodystyle">
+   <div class="content">
 
-    <h1>Ulysses Contract</h1>
+    <div class="container"><img src="title.png" width="600px" alt="Ulysses' Contract"></div>
+
+    <img class="logo" src="logo.png" width="650px"/>
+   
+    <div class="container" id="showContract">
+        <p><span class="OutField" id="contractTitle"></span></p>
+    <!--<p><span class="OutField" id="isLockedOut"></span></p>  -->
+        <p><span class="OutField" id="amountLockedOut"></span></p>
+        <p><span class="OutField" id="signedDateOut"></span></p>  
+        <p><span class="OutField" id="endDateOut"></span></p>  
+        <p><span class="OutField" id="countdown"></span></p>
+    <!--    <p><span id="timePassedOut"></span></p> 
+        <p><span id="timeTillDeadlineOut"></span></p>   -->
+    </div>
 
     <div class="container" id="Deposit">
-        <p>Step 1 => Deposit ETH!</p>
-        <input type="number" id="depositAmount" placeholder="Deposit Amount"/><button type="btn btn-primary" id="btnDeposit">Deposit ETH!</button>
+        <br>
+        <img src="step1.png" width="600px" alt="Step 1: Deposit ETH!"><br>
+        <input type="number" id="depositAmount" placeholder="Deposit Amount"/><button class="button" type="btn btn-primary" id="btnDeposit">Deposit ETH!</button>
+        <br><span class="OutField" id="depositOut"></span>
+    </p>
+    </div>
+    
+
+    <div class="container" id="Deposit">
+        <br><img src="step2.png" width="600px" alt="STEP2 Choose timespan!"><br>
+            <input type="number" id="lockTime" placeholder="Locktime in Seconds" size="50"><br>
+            <button class="button" type="btn btn-primary" id="btnCalcEndDate">Calculate End Date</button><br>
+            <span class="OutField" id="calcEndDateOut"></span><br>
+            <img src="timetable.png" width="600px" alt="TIMETABLE">
+        </p>  
+
+        <table>
+            <tr>
+                <td>Duration</td>
+                <td>Input</td>
+            </tr>
+            <tr>
+                <td>1 Minute</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>5 Minutes</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>1 Hour</td>
+                <td>3600</td>
+            </tr>
+            <tr>
+                <td>1 Day</td>
+                <td>86400</td>
+            </tr>
+            <tr>
+                <td>7 Days</td>
+                <td>604800</td>
+            </tr>
+            <tr>
+                <td>30 Days</td>
+                <td>2592000</td>
+            </tr>
+            <tr>
+                <td>180 Days</td>
+                <td>15552000</td>
+            </tr>
+            <tr>
+                <td>360 Days</td>
+                <td>31104000</td>
+            </tr>
+            <tr>
+                <td>720 Days = 1,97 years</td>
+                <td>62208000</td>
+            </tr>
+            <tr>
+                <td>1800 Days = 4,93 years</td>
+                <td>155520000</td>
+            </tr>
+            <tr>
+                <td>3600 Days = 9,86 years</td>
+                <td>311040000</td>
+            </tr>
+        </table>
+       
     </div>
 
     <div class="container" id="Create Vault">
-        <p>Step 2 => Sign the Ulysses Contract!</p>
-        <input type="number" id="lockTime" placeholder="Time ETH shall be locked in Seconds" /><button type="btn btn-primary" id="btnSign">Sign Ulysses Contract!</button>
-        <h3>ATTENTION! All your ETH Contract Balance will be locked for the choosen timespan!</h3>
+        <br>
+        <img src="step3.png" width="600px" alt="Step3 Sign Ulysses' Contract!" />
+        <button class="button" type="btn btn-primary" id="btnSign">Sign Ulysses Contract!</button>
+        <img src="disclaimer.png" width="1000px" />
     </div>
 
     <div class="container" id="Withdraw">
-        <p>Step 3 => Withdraw after time is up!</p>
-        <button type="btn btn-primary" id="btnWithdraw">Withdraw after time is up!</button>
+        <br>
+        <img src="step4.png" width="600px" alt="Step 4 Withdraw after time is up" />
+
+        <button class="button" type="btn btn-primary" id="btnWithdraw">Withdraw after time is up!</button>
     </div>
 
     <div class="container" id="ForceWithdraw">
-        <p>EMERGENCY => Force Withdraw! NOTE that 25% of your ETH will be donated if you forceWithdraw!</p>
-        <button type="btn btn-primary" id="btnForceWithdraw">Force Withdraw!</button>
+        <br>
+        <img src="forcewithdraw.png" width="600px" alt="Force Withdraw!" />
+        <button class="button" type="btn btn-primary" id="btnForceWithdraw">Force Withdraw!</button>
+        <span class="OutField" id="errormsg"></span>
     </div>
 
     <div class="container" id="showBalance">
-        <p>Your ETH Balance: <span id="balanceOut"></span>  </p>
+    <!--    <p>Your ETH Contract Balance: <span id="balanceOut"></span>  </p> -->
     </div>
-    <div class="container" id="showContract">
-        <p>Your Ulysses Contract:</p>
-        <p><span id="isLockedOut"></span></p>
-        <p><span id="signedDateOut"></span></p>  
-        <p><span id="amountLockedOut"></span></p>
-        <p><span id="timePassedOut"></span></p>
-        <p><span id="timeTillDeadlineOut"></span></p>
+   
 
-        
-    </div>
-
-    <div class="container" id="timeTravel">
-        <p>Increase EVM Time and Mine Block</p>
-        <button type="btn btn-primary" id="btnTimeTravel">TimeTravel!</button>
-    </div>
+</div>
     
 </body>
 </html>

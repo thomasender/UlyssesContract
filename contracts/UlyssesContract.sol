@@ -24,7 +24,11 @@ contract UlyssesContract{
         return block.timestamp;
     }
     function forceWithdraw() public payable {
-        require(Vaults[msg.sender].isLocked = true, "Your ETH is not locked, use normal withdraw instead!");
+           if(block.timestamp > Vaults[msg.sender].timeLockedAt + Vaults[msg.sender].time){
+            Vaults[msg.sender].isLocked = false;
+        }
+        require(Vaults[msg.sender].isLocked != false, "Your ETH is not locked, use normal withdraw instead!");
+        require(balances[msg.sender] != 0, "You do not have any ETH deposited!");
         uint toTransfer = balances[msg.sender] / 100 * 75;
         uint donation = balances[msg.sender] / 100 * 25;
         balances[msg.sender] = 0;
@@ -38,6 +42,7 @@ contract UlyssesContract{
     
 
     function deposit() public payable {
+
         balances[msg.sender] += msg.value;
     }
 
@@ -65,7 +70,7 @@ contract UlyssesContract{
         if(block.timestamp > Vaults[msg.sender].timeLockedAt + Vaults[msg.sender].time){
             Vaults[msg.sender].isLocked = false;
         }
-        
+
         require(Vaults[msg.sender].isLocked == false, "Your vault is still locked!");
         require(balances[msg.sender] != 0, "You do not have any funds in this contract!");
         
